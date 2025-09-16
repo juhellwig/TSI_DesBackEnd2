@@ -22,7 +22,7 @@ function esperaObjetoQueMostraIMC(Jogador $pessoaUsaIMC){
 };
 
 $atl1 = new Atleta("Walter Kannemann",33,1.84,83);
-$med1 = new Medico("Pualo Paixão",122343,"Fisioterapeuta",60,1.8,90);
+$med1 = new Medico("Paulo Paixão",122343,"Fisioterapeuta",60,1.8,90);
 $arbi = new Arbitro("Anderson Daronco",43,'Juiz',1.88,90);
 
 $torc =  new Torcedor("Gill", 30, 75,1.9, "Tricolor" );
@@ -36,7 +36,8 @@ esperaObjetoQueImplementaIMC($torc);
 
 esperaObjetoQueImplementaIMC($med1);
 
-esperaObjetoQueImplementaIMC($atl1);
+//comentei essa pois é exemplo.
+//esperaObjetoQueImplementaIMC($atl1);
 
 esperaObjetoQueImplementaIMC($arbi);
 
