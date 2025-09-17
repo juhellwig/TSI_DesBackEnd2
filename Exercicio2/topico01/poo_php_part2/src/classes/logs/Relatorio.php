@@ -2,6 +2,7 @@
 namespace Gvg\Dbe2\classes\logs;
 
 use Gvg\Dbe2\classes\Abstracts\Pessoa;
+use Gvg\Dbe2\interfaces\iFuncionario;
 
 class Relatorio{
 
@@ -15,6 +16,11 @@ class Relatorio{
 	public function log(Pessoa $pessoa):void
 	{
 		echo "\n\nlog: \n".$pessoa;//__toString retorna objeto como string
+
+		if ($pessoa instanceof iFuncionario) {
+            echo "\n" . $pessoa->mostrarSalario();
+            echo "\n" . $pessoa->mostrarTempoContrato();
+        }
 	}
 
 	public function imprime(): void{

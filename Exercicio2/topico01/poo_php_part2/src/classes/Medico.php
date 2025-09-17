@@ -3,13 +3,16 @@ namespace Gvg\Dbe2\classes;
 
 use Exception;
 use Gvg\Dbe2\classes\Abstracts\Pessoa;
+use Gvg\Dbe2\interfaces\iFuncionario;
 use Gvg\Dbe2\interfaces\IMC;
 
-class Medico extends Pessoa implements IMC{
+class Medico extends Pessoa implements iFuncionario{
 
 	private $CRM, $especialidade, $imc;
+	private $salario;
+	private $anosContrato;
 
-	public function __construct($nome, $crm,$especialidade,$idade=null,$altura=1, $peso=1)
+	public function __construct($nome, $crm,$especialidade,$idade=null,$altura=1, $peso=1, $salario=0, $anosContrato=1)
 	{
 		$this->nome = $nome;
 		$this->CRM = $crm;
@@ -17,12 +20,18 @@ class Medico extends Pessoa implements IMC{
 		$this->idade = $idade;
 		$this->peso = $peso;
 		$this->altura = $altura;
+		$this->salario = $salario;
+		$this->anosContrato = $anosContrato;
 		$this->calcImc();
 	}
 
-	public function getCRM(){
-		return $this->CRM;
-	}
+	public function mostrarSalario(): string {
+        return "Salário: R$ " . number_format($this->salario, 2, ',', '.');
+    }
+
+    public function mostrarTempoContrato(): string {
+        return "Contrato de {$this->anosContrato} anos.";
+    }
 
 	public function calcImc():void 
 	{

@@ -9,16 +9,25 @@ use Gvg\Dbe2\classes\Esportista;
 use Gvg\Dbe2\classes\Jogador;
 use Gvg\Dbe2\classes\JogadorAtacante;
 use Gvg\Dbe2\classes\JogadorDefesa;
+use Gvg\Dbe2\classes\logs\Relatorio;
 use Gvg\Dbe2\classes\Medico;
 use Gvg\Dbe2\classes\Torcedor;
 use Gvg\Dbe2\interfaces\IMC;
 
-function esperaObjetoQueImplementaIMC(IMC $pessoaComIMC){
-    $pessoaComIMC->showImc();
+function esperaObjetoQueImplementaIMC($pessoaComIMC){
+    if (method_exists($pessoaComIMC, 'showImc')) {
+        $pessoaComIMC->showImc();
+    } else {
+        echo $pessoaComIMC->nome . " não possui IMC\n";
+    }
 };
 
 function esperaObjetoQueMostraIMC(Jogador $pessoaUsaIMC){
-    $pessoaUsaIMC->showImc();
+    if (method_exists($pessoaUsaIMC, 'showImc')) {
+        $pessoaUsaIMC->showImc();
+    } else {
+        echo $pessoaUsaIMC->nome . " é Jogador mas não usa IMC\n";
+    }
 };
 
 $atl1 = new Atleta("Walter Kannemann",33,1.84,83);
@@ -31,30 +40,27 @@ $sport = new Esportista("Fulano",24,1.75,80);
 $atl2 = new JogadorDefesa("Pedro Geromel",36, 1.83,75);
 $atl3 = new JogadorAtacante("Luiz Soarez",36,1.8,80);
 
-
 esperaObjetoQueImplementaIMC($torc);
-
 esperaObjetoQueImplementaIMC($med1);
-
-//comentei essa pois é exemplo.
-//esperaObjetoQueImplementaIMC($atl1);
-
+// esperaObjetoQueImplementaIMC($atl1);
 esperaObjetoQueImplementaIMC($arbi);
-
 // esperaObjetoQueImplementaIMC($sport);
 
-
 esperaObjetoQueMostraIMC($atl2);
-
 esperaObjetoQueMostraIMC($atl3);
-
-
 
 // $class = Jogador::class;
 // $class = Pessoa::class;
-$class = IMC::class;
+// $class = IMC::class;
 
-if($atl1 instanceof $class)
-    echo "\n\n\t $atl1->nome é um instância de $class";
+if (method_exists($atl1, 'showImc')) {
+    echo "\n\n\t {$atl1->nome} usa a trait IMC";
+}
+
+$relatorio = new Relatorio();
+$relatorio->add($atl1);
+$relatorio->add($med1);
+$relatorio->imprime();
+
 
 echo "\n";
